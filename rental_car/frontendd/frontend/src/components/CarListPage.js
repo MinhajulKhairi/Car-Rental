@@ -10,10 +10,13 @@ import rushImage from '../assets/images/rush_putih.jpg';
 const CarListPage = () => {
   const navigate = useNavigate();
 
-const handleDetailClick = (carId) => {
-  navigate(`/car-detail/${carId}`);
-};
+  const handleDetailClick = (carId) => {
+    navigate(`/car-detail/${carId}`);
+  };
 
+  const handleRentClick = () => {
+    navigate(`/rent`);
+  };
 
   return (
     <div>
@@ -29,7 +32,7 @@ const handleDetailClick = (carId) => {
               <DetailItem>Warna: Putih</DetailItem>
             </CarDetails>
             <ButtonContainer>
-              <Button>Sewa Mobil</Button>
+              <Button onClick={handleRentClick}>Sewa Mobil</Button>
               <Button onClick={() => handleDetailClick(1)}>Detail Mobil</Button>
             </ButtonContainer>
           </CarInfo>
@@ -45,7 +48,7 @@ const handleDetailClick = (carId) => {
               <DetailItem>Warna: Hitam</DetailItem>
             </CarDetails>
             <ButtonContainer>
-              <Button>Sewa Mobil</Button>
+              <Button onClick={handleRentClick}>Sewa Mobil</Button>
               <Button onClick={() => handleDetailClick(2)}>Detail Mobil</Button>
             </ButtonContainer>
           </CarInfo>
@@ -61,7 +64,7 @@ const handleDetailClick = (carId) => {
               <DetailItem>Warna: Putih</DetailItem>
             </CarDetails>
             <ButtonContainer>
-              <Button>Sewa Mobil</Button>
+              <Button onClick={handleRentClick}>Sewa Mobil</Button>
               <Button onClick={() => handleDetailClick(3)}>Detail Mobil</Button>
             </ButtonContainer>
           </CarInfo>
