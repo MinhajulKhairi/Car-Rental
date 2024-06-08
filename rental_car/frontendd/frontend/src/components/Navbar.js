@@ -18,7 +18,7 @@ const Navbar = () => {
       <NavSection>
         <NavItem href="/payment">Payment</NavItem>
         <NavItem href="/list-mobil">List Mobil</NavItem>
-        <NavItem href="/contact">Contact</NavItem>
+        <NavItem href="/contact">Rating</NavItem>
       </NavSection>
       <NavSection>
         <NavItem href="/register">Register</NavItem>

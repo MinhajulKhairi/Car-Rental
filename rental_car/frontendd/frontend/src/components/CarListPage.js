@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import inovaImage from '../assets/images/inova_putih.jpg';
@@ -7,6 +8,13 @@ import avanzaImage from '../assets/images/avanza_hitam.jpg';
 import rushImage from '../assets/images/rush_putih.jpg';
 
 const CarListPage = () => {
+  const navigate = useNavigate();
+
+const handleDetailClick = (carId) => {
+  navigate(`/car-detail/${carId}`);
+};
+
+
   return (
     <div>
       <Navbar />
@@ -22,13 +30,13 @@ const CarListPage = () => {
             </CarDetails>
             <ButtonContainer>
               <Button>Sewa Mobil</Button>
-              <Button>Detail Mobil</Button>
+              <Button onClick={() => handleDetailClick(1)}>Detail Mobil</Button>
             </ButtonContainer>
           </CarInfo>
         </CarCard>
 
         <CarCard>
-          <CarImage src={avanzaImage}/>
+          <CarImage src={avanzaImage} />
           <CarInfo>
             <CarTitle>Avanza 2024 <Price>Rp. 1.750.000/day</Price></CarTitle>
             <CarDetails>
@@ -38,13 +46,13 @@ const CarListPage = () => {
             </CarDetails>
             <ButtonContainer>
               <Button>Sewa Mobil</Button>
-              <Button>Detail Mobil</Button>
+              <Button onClick={() => handleDetailClick(2)}>Detail Mobil</Button>
             </ButtonContainer>
           </CarInfo>
         </CarCard>
 
         <CarCard>
-          <CarImage src={rushImage}/>
+          <CarImage src={rushImage} />
           <CarInfo>
             <CarTitle>Rush 2024 <Price>Rp. 1.500.000/day</Price></CarTitle>
             <CarDetails>
@@ -54,7 +62,7 @@ const CarListPage = () => {
             </CarDetails>
             <ButtonContainer>
               <Button>Sewa Mobil</Button>
-              <Button>Detail Mobil</Button>
+              <Button onClick={() => handleDetailClick(3)}>Detail Mobil</Button>
             </ButtonContainer>
           </CarInfo>
         </CarCard>
@@ -77,7 +85,7 @@ const CarCard = styled.div`
   border-radius: 10px;
   overflow: hidden;
   width: 300px;
-  height: 450px;  /* Set fixed height for the card */
+  height: 450px;
   margin: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -86,14 +94,14 @@ const CarCard = styled.div`
 
 const CarImage = styled.img`
   width: 100%;
-  height: 200px;  /* Set fixed height for the image */
+  height: 200px;
   object-fit: cover;
 `;
 
 const CarInfo = styled.div`
   padding: 20px;
   text-align: left;
-  flex-grow: 1;  /* Allow CarInfo to take up remaining space */
+  flex-grow: 1;
 `;
 
 const CarTitle = styled.h2`

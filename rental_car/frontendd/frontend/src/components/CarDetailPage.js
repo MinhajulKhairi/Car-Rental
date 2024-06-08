@@ -1,83 +1,92 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import carImage from '../assets/images/inova_putih.jpg';
 
-const CarDetailPage = ({ car }) => {
+const CarDetailPage = () => {
+  const { id } = useParams();
+  // Fetch car details based on the id from a data source or state management
+
   return (
-    <div>
+    <PageWrapper>
       <Navbar />
-      <CarDetailContainer>
-        <CarImage src={car.image} alt={car.name} />
-        <CarInfo>
-          <CarTitle>{car.name} <Price>{car.price}</Price></CarTitle>
-          <CarDetails>
-            <DetailItem>Jumlah Kursi: {car.seats}</DetailItem>
-            <DetailItem>Transmisi: {car.transmission}</DetailItem>
-            <DetailItem>Warna: {car.color}</DetailItem>
-          </CarDetails>
-          <ButtonContainer>
-            <Button>Sewa Mobil</Button>
-          </ButtonContainer>
-        </CarInfo>
-      </CarDetailContainer>
+      <DetailContainer>
+        <ImageSection>
+          <CarImage src={carImage} alt="Car Detail" />
+        </ImageSection>
+        <InfoSection>
+          <Title>Toyota Yaris GR Sport 2021</Title>
+          <Price>Rp. 350.000/day</Price>
+          <Details>
+            <DetailItem>Jumlah Kursi: 5</DetailItem>
+            <DetailItem>Transmisi: CVT 7-percepatan</DetailItem>
+            <DetailItem>Warna: Putih</DetailItem>
+          </Details>
+          <Button>Sewa Mobil</Button>
+        </InfoSection>
+      </DetailContainer>
       <Footer />
-    </div>
+    </PageWrapper>
   );
 };
 
-const CarDetailContainer = styled.div`
+const PageWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const DetailContainer = styled.div`
+  display: flex;
+  flex: 1;
   justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  align-items: center;
   padding: 20px;
+`;
+
+const ImageSection = styled.div`
+  flex: 1;
+  text-align: center;
 `;
 
 const CarImage = styled.img`
   width: 100%;
   max-width: 500px;
-  height: auto;
-  object-fit: cover;
-  margin: 20px;
+  border-radius: 10px;
 `;
 
-const CarInfo = styled.div`
+const InfoSection = styled.div`
+  flex: 1;
   padding: 20px;
-  text-align: left;
-  max-width: 500px;
 `;
 
-const CarTitle = styled.h2`
+const Title = styled.h2`
   font-size: 24px;
   margin-bottom: 10px;
 `;
 
-const Price = styled.span`
+const Price = styled.p`
+  font-size: 20px;
   color: #ff8000;
-  font-weight: bold;
+  margin-bottom: 20px;
 `;
 
-const CarDetails = styled.div`
-  margin: 10px 0;
+const Details = styled.div`
+  margin-bottom: 20px;
 `;
 
 const DetailItem = styled.p`
   margin: 5px 0;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
 const Button = styled.button`
   background-color: #ff8000;
   color: white;
   border: none;
-  padding: 10px;
+  padding: 10px 20px;
   cursor: pointer;
-  width: 100%;
   border-radius: 5px;
 `;
 

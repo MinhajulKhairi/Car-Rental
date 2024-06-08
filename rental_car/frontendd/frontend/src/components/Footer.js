@@ -19,10 +19,12 @@ const Footer = () => {
 };
 
 const FooterContainer = styled.footer`
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-    background-color: #cac7c7;
+  display: flex;
+  justify-content: space-around;
+  align-items: center; /* Center items vertically */
+  padding: 10px 20px; /* Adjust padding */
+  background-color: #cac7c7;
+   /* Set the height of the footer */
 `;
 
 const FooterSection = styled.div`
