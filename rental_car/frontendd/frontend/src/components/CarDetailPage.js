@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -7,7 +7,11 @@ import carImage from '../assets/images/inova_putih.jpg';
 
 const CarDetailPage = () => {
   const { id } = useParams();
-  // Fetch car details based on the id from a data source or state management
+  const navigate = useNavigate();
+
+  const handleRentClick = () => {
+    navigate(`/rent`);
+  };
 
   return (
     <PageWrapper>
@@ -24,7 +28,7 @@ const CarDetailPage = () => {
             <DetailItem>Transmisi: CVT 7-percepatan</DetailItem>
             <DetailItem>Warna: Putih</DetailItem>
           </Details>
-          <Button>Sewa Mobil</Button>
+          <Button onClick={handleRentClick}>Sewa Mobil</Button>
         </InfoSection>
       </DetailContainer>
       <Footer />

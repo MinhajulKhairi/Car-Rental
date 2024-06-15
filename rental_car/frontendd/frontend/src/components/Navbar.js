@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Fungsi untuk menangani perubahan pada input pencarian
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -18,7 +17,7 @@ const Navbar = () => {
       <NavSection>
         <NavItem href="/payment">Payment</NavItem>
         <NavItem href="/list-mobil">List Mobil</NavItem>
-        <NavItem href="/contact">Rating</NavItem>
+        <NavItem href="/rating">Rating</NavItem> {/* Update link to RatingPage */}
       </NavSection>
       <NavSection>
         <NavItem href="/register">Register</NavItem>
@@ -31,7 +30,7 @@ const Navbar = () => {
 const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Mengatur posisi elemen ke tengah vertikal */
+  align-items: center;
   padding: 20px;
   background-color: #cac7c7;
 `;
@@ -44,7 +43,7 @@ const NavSection = styled.div`
 const NavItem = styled.a`
   text-decoration: none;
   color: black;
-  margin-right: 50px; /* Menambahkan jarak antara elemen */
+  margin-right: 50px;
 `;
 
 const LoginButton = styled.a`
@@ -53,7 +52,7 @@ const LoginButton = styled.a`
   padding: 10px 20px;
   text-decoration: none;
   border-radius: 5px;
-  margin-left: 20px; /* Menambahkan jarak antara elemen */
+  margin-left: 20px;
 `;
 
 const SearchInput = styled.input`
