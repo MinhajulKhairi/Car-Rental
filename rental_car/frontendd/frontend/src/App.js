@@ -7,12 +7,16 @@ import CarListPage from './components/CarListPage';
 import CarDetailPage from './components/CarDetailPage';
 import PaymentPage from './components/PaymentPage';
 import RentPage from './components/RentPage';
+<<<<<<< HEAD
 import RatingPage from './components/RatingPage';
 import AdminPage from './components/AdminPage';
 import UsersPage from './components/admin/UsersPage';
 import CarsPage from './components/admin/CarsPage';
 import BookingsPage from './components/admin/BookingsPage';
 import PaymentsPage from './components/admin/PaymentsPage';
+=======
+import RatingPage from './components/RatingPage'; // Import the RatingPage
+>>>>>>> 08176f670c70f520702a299a1e8d090e899b915d
 import './App.css';
 
 function App() {
@@ -27,12 +31,16 @@ function App() {
           <Route path="/car-detail/:id" element={<CarDetailPage />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/rent" element={<RentPage />} />
+<<<<<<< HEAD
           <Route path="/rating" element={<RatingPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/users" element={<UsersPage />} />
           <Route path="/admin/cars" element={<CarsPage />} />
           <Route path="/admin/bookings" element={<BookingsPage />} />
           <Route path="/admin/payments" element={<PaymentsPage />} />
+=======
+          <Route path="/rating" element={<RatingPage />} /> {/* Add route for RatingPage */}
+>>>>>>> 08176f670c70f520702a299a1e8d090e899b915d
         </Routes>
       </div>
     </Router>
