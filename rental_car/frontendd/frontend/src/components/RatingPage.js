@@ -1,8 +1,3 @@
-// src/components/RatingPage.js
-<<<<<<< HEAD
-=======
-
->>>>>>> 08176f670c70f520702a299a1e8d090e899b915d
 import React from 'react';
 import styled from 'styled-components';
 import Navbar from './Navbar';
