@@ -4,14 +4,21 @@ import styled from 'styled-components';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import axios from 'axios'; // Import axios for API requests
+import { useAuth } from './app/AuthProvider'; // Import useAuth for authentication
 import { serverApi } from './app/config';
 
 const CarDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const auth = useAuth();
   const [car, setCar] = useState(null);
 
   useEffect(() => {
+    if (!auth.user) {
+      navigate("/login");
+      return;
+    }
+
     const fetchCarById = async () => {
       try {
         const response = await axios.get(`${serverApi}/cars/${id}`);
@@ -23,7 +30,7 @@ const CarDetailPage = () => {
     };
 
     fetchCarById();
-  }, [id]);
+  }, [auth.user, id, navigate]);
 
   const handleRentClick = () => {
     navigate(`/rent/${id}`);

@@ -128,8 +128,8 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`pengguna_id`, `nama_lengkap`, `email`, `password_hash`, `alamat`, `nomor_telepon`, `role`) VALUES
-(1, 'Ademin', 'admin@gmail.com', 'scrypt:32768:8:1$AgO8Rch6d1SCRcsy$49c1ee5119feb31f8607371e09a5e1945ee7186693db6edaed307680546cec853cdf22d2df4b49aa36e0cda7d5804336b544ba865b3e0fed8e1d8aa38db3ad86', 'Jl. Merpati No. 123, Jakarta', '081234567890', 'admin'),
-(2, 'User', 'user@mobil.com', 'scrypt:32768:8:1$D5ND2L7YXBVniyjM$5bf1f59903a2e1f0fe226c44a311c70701c16952a11a67d439ff668d1256cf4bedecf98b564c477475374da630adfdd7c9d575f7668b9c225635cef9d69e1f67', 'Alamat', '0882233222', 'user');
+(1, 'Admin', 'admin@gmail.com', 'scrypt:32768:8:1$AgO8Rch6d1SCRcsy$49c1ee5119feb31f8607371e09a5e1945ee7186693db6edaed307680546cec853cdf22d2df4b49aa36e0cda7d5804336b544ba865b3e0fed8e1d8aa38db3ad86', 'BTN PAO PAO', '0811111111', 'admin'),
+(2, 'User', 'user@mobil.com', 'scrypt:32768:8:1$D5ND2L7YXBVniyjM$5bf1f59903a2e1f0fe226c44a311c70701c16952a11a67d439ff668d1256cf4bedecf98b564c477475374da630adfdd7c9d575f7668b9c225635cef9d69e1f67', 'Alamat', '08821123222', 'user');
 
 --
 -- Indexes for dumped tables

@@ -4,16 +4,23 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import axios from 'axios'; // Import axios for API requests
+import { useAuth } from './app/AuthProvider'; // Import useAuth for authentication
 import { serverApi } from './app/config';
 
-const CarListPage = ({ isAuthenticated }) => {
+const CarListPage = () => {
   const navigate = useNavigate();
+  const auth = useAuth();
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
+    if (!auth.user) {
+      navigate("/login");
+      return;
+    }
+
     const fetchCars = async () => {
       try {
-        const response = await axios.get(`${serverApi}/cars`); 
+        const response = await axios.get(`${serverApi}/cars`);
         setCars(response.data);
       } catch (error) {
         console.error('Error fetching cars:', error);
@@ -22,7 +29,7 @@ const CarListPage = ({ isAuthenticated }) => {
     };
 
     fetchCars();
-  }, []);
+  }, [auth.user, navigate]);
 
   const handleDetailClick = (carId) => {
     navigate(`/car-detail/${carId}`);
@@ -34,13 +41,13 @@ const CarListPage = ({ isAuthenticated }) => {
 
   return (
     <div>
+      <Navbar />
       <CarListContainer>
         {cars.map((car) => (
           <CarCard key={car.mobil_id}>
             <StatusLabel>{car.status}</StatusLabel>
             <CarImage src={`${serverApi}/${car.gambar}`} />
             <CarInfo>
-              {/* tanpa koma diakhir angka */}
               <CarTitle>{car.nama_mobil} <Price>{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(car.harga_sewa)}/day</Price></CarTitle>
               <CarDetails>
                 <DetailItem>Jumlah Kursi: {car.jumlah_kursi}</DetailItem>
@@ -55,6 +62,7 @@ const CarListPage = ({ isAuthenticated }) => {
           </CarCard>
         ))}
       </CarListContainer>
+      <Footer />
     </div>
   );
 };

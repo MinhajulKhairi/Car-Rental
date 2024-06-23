@@ -10,8 +10,8 @@ const Footer = () => {
       </FooterSection>
       <FooterSection>
         <h3>Hubungi Kami</h3>
-        <p>Alamat: Jalan Raya No. 123, Jakarta</p>
-        <p>Telepon: (021) 123-4567</p>
+        <p>Alamat: Universitas Hasanuddin</p>
+        <p>Telepon: 0829281291821</p>
         <p>Email: info@rentalmobil.com</p>
       </FooterSection>
     </FooterContainer>
