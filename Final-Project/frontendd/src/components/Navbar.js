@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import LogoImage from '../assets/images/Logo_UH.png';
 import { useAuth } from './app/AuthProvider';
 
 const Navbar = () => {
@@ -29,24 +30,24 @@ const Navbar = () => {
     }
   };
 
-
   return (
     <Nav>
       <NavSection>
+        <Logo src={LogoImage} alt="Logo" />
         <NavItem to="/">Rental Mobil</NavItem>
-        <SearchInput type="text" placeholder="Cari..." value={searchQuery} onChange={handleSearchInputChange} />
+        {/*<SearchInput type="text" placeholder="Cari..." value={searchQuery} onChange={handleSearchInputChange} />*/}
       </NavSection>
       <NavSection>
         <NavItem to="/payment">Pembayaran</NavItem>
         <NavItem to="/list-mobil">Daftar Mobil</NavItem>
-        <NavItem to="/rating">Penilaian</NavItem> {/* Perbarui tautan ke RatingPage */}
+        <NavItem to="/rating">Feedback</NavItem> {/* Perbarui tautan ke RatingPage */}
       </NavSection>
       <NavSection>
         {auth.token ? (
-          <NavItem to="/logout" >Keluar</NavItem>
+          <LogoutButton to="/logout">Keluar</LogoutButton>
         ) : (
           <>
-            <NavItem to="/register">Daftar</NavItem>
+            <RegisterButton to="/register">Daftar</RegisterButton>
             <LoginButton to="/login">Masuk</LoginButton>
           </>
         )}
@@ -83,10 +84,33 @@ const LoginButton = styled(Link)`
   margin-left: 20px;
 `;
 
-const SearchInput = styled.input`
-  padding: 8px;
-  border: 1px solid #ccc;
+const RegisterButton = styled(Link)`
+  background-color: #ff8000;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
   border-radius: 5px;
+  margin-left: 20px;
 `;
+
+const LogoutButton = styled(Link)`
+  background-color: #4e4e4e;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-left: 20px;
+`;
+
+const Logo = styled.img`
+  height: 40px;
+  margin-right: 50px;
+`;
+
+// const SearchInput = styled.input`
+//   padding: 8px;
+//   border: 1px solid #ccc;
+//   border-radius: 5px;
+// `;
 
 export default Navbar;

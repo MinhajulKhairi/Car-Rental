@@ -76,9 +76,9 @@ const CarsPage = () => {
     <div>
       <AdminContainer>
         <Sidebar>
-          <NavItem>
-            <Link to="/admin/users">Pengguna</Link>
-          </NavItem>
+          {/*<NavItem>*/}
+          {/*  <Link to="/admin/users">Pengguna</Link>*/}
+          {/*</NavItem>*/}
           <NavItem>
             <Link to="/admin/cars">Mobil</Link>
           </NavItem>

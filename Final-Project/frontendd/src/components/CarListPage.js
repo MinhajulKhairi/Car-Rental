@@ -40,39 +40,60 @@ const CarListPage = () => {
   };
 
   return (
-    <div>
+    <PageWrapper>
       <Navbar />
-      <CarListContainer>
-        {cars.map((car) => (
-          <CarCard key={car.mobil_id}>
-            <StatusLabel>{car.status}</StatusLabel>
-            <CarImage src={`${serverApi}/${car.gambar}`} />
-            <CarInfo>
-              <CarTitle>{car.nama_mobil} <Price>{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(car.harga_sewa)}/day</Price></CarTitle>
-              <CarDetails>
-                <DetailItem>Jumlah Kursi: {car.jumlah_kursi}</DetailItem>
-                <DetailItem>Transmisi: {car.transmisi}</DetailItem>
-                <DetailItem>Warna: {car.warna}</DetailItem>
-              </CarDetails>
-              <ButtonContainer>
-                <Button onClick={() => handleRentClick(car.mobil_id)}>Sewa Mobil</Button>
-                <Button onClick={() => handleDetailClick(car.mobil_id)}>Detail Mobil</Button>
-              </ButtonContainer>
-            </CarInfo>
-          </CarCard>
-        ))}
-      </CarListContainer>
-      <Footer />
-    </div>
+      <ContentWrapper>
+        <CarListContainer>
+          {cars.map((car) => (
+            <CarCard key={car.mobil_id}>
+              <StatusLabel>{car.status}</StatusLabel>
+              <CarImage src={`${serverApi}/${car.gambar}`} alt={car.nama_mobil} />
+              <CarInfo>
+                <CarTitle>
+                  {car.nama_mobil}
+                  <Price>{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(car.harga_sewa)}/day</Price>
+                </CarTitle>
+                <CarDetails>
+                  <DetailItem>Jumlah Kursi: {car.jumlah_kursi}</DetailItem>
+                  <DetailItem>Transmisi: {car.transmisi}</DetailItem>
+                  <DetailItem>Warna: {car.warna}</DetailItem>
+                </CarDetails>
+                <ButtonContainer>
+                  <Button onClick={() => handleRentClick(car.mobil_id)}>Sewa Mobil</Button>
+                  <Button onClick={() => handleDetailClick(car.mobil_id)}>Detail Mobil</Button>
+                </ButtonContainer>
+              </CarInfo>
+            </CarCard>
+          ))}
+        </CarListContainer>
+      </ContentWrapper>
+    </PageWrapper>
   );
 };
+
+const PageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const ContentWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+`;
 
 const CarListContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
   padding: 20px;
+  gap: 20px;
 `;
 
 const CarCard = styled.div`
@@ -81,11 +102,16 @@ const CarCard = styled.div`
   overflow: hidden;
   width: 300px;
   height: 450px;
-  margin: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
   position: relative;  /* Added for positioning StatusLabel */
+  
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const StatusLabel = styled.div`
@@ -128,6 +154,8 @@ const CarDetails = styled.div`
 
 const DetailItem = styled.p`
   margin: 5px 0;
+  font-size: 14px;
+  color: #555;
 `;
 
 const ButtonContainer = styled.div`
@@ -144,6 +172,11 @@ const Button = styled.button`
   cursor: pointer;
   width: 48%;
   border-radius: 5px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #e67300;
+  }
 `;
 
 export default CarListPage;

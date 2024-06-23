@@ -24,13 +24,13 @@ const AdminPage = () => {
             <Link to="/admin/users">Users</Link>
           </NavItem>
           <NavItem>
-            <Link to="/admin/cars">Cars</Link>
+            <Link to="/admin/cars">Mobil</Link>
           </NavItem>
           <NavItem>
-            <Link to="/admin/bookings">Bookings</Link>
+            <Link to="/admin/bookings">Pemesanan</Link>
           </NavItem>
           <NavItem>
-            <Link to="/admin/payments">Payments</Link>
+            <Link to="/admin/payments">Pembayaran</Link>
           </NavItem>
         </Sidebar>
         <Content>
@@ -58,7 +58,7 @@ const NavItem = styled.div`
 
   a {
     text-decoration: none;
-    color: #007bff;
+    color: black;
 
     &:hover {
       text-decoration: underline;

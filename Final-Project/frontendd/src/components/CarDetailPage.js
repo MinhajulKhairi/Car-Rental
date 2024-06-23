@@ -37,29 +37,29 @@ const CarDetailPage = () => {
   };
 
   if (!car) {
-    return <div>Loading...</div>; 
+    return <LoadingWrapper>Loading...</LoadingWrapper>;
   }
 
   return (
     <PageWrapper>
       <Navbar />
-      <DetailContainer>
-        <ImageSection>
-          <CarImage src={`${serverApi}/${car.gambar}`} style={{ width: '100%', maxWidth: '300px', borderRadius: '10px' }} />
-        </ImageSection>
-        <InfoSection>
-          <Title>{car.nama_mobil}</Title>
-          <Price>{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(car.harga_sewa)}/day</Price>
-          <Details>
-            <DetailItem>Jumlah Kursi: {car.jumlah_kursi}</DetailItem>
-            <DetailItem>Transmisi: {car.transmisi}</DetailItem>
-            <DetailItem>Warna: {car.warna}</DetailItem>
-            <DetailItem>Status: {car.status}</DetailItem> {/* Make sure 'status' is part of the data returned by API */}
-          </Details>
-          <Button onClick={handleRentClick}>Sewa Mobil</Button>
-        </InfoSection>
-      </DetailContainer>
-      <Footer />
+      <ContentWrapper>
+        <DetailContainer>
+          <ImageSection>
+            <CarImage src={`${serverApi}/${car.gambar}`} alt={car.nama_mobil} />
+          </ImageSection>
+          <InfoSection>
+            <Title>{car.nama_mobil}</Title>
+            <Price>{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(car.harga_sewa)}/day</Price>
+            <Details>
+              <DetailItem>Jumlah Kursi: {car.jumlah_kursi}</DetailItem>
+              <DetailItem>Transmisi: {car.transmisi}</DetailItem>
+              <DetailItem>Warna: {car.warna}</DetailItem>
+            </Details>
+            <Button onClick={handleRentClick}>Sewa Mobil</Button>
+          </InfoSection>
+        </DetailContainer>
+      </ContentWrapper>
     </PageWrapper>
   );
 };
@@ -70,37 +70,56 @@ const PageWrapper = styled.div`
   min-height: 100vh;
 `;
 
+const ContentWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 130px;
+  background-color: #f8f8f8;
+`;
+
 const DetailContainer = styled.div`
   display: flex;
-  flex: 1;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  padding: 20px;
+  max-width: 1200px;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
 `;
 
 const ImageSection = styled.div`
-  flex: 1;
-  text-align: center;
+  width: 100%;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CarImage = styled.img`
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   border-radius: 10px;
+  margin: 20px;
 `;
 
 const InfoSection = styled.div`
-  flex: 1;
+  width: 100%;
   padding: 20px;
+  text-align: center;
 `;
 
 const Title = styled.h2`
-  font-size: 24px;
+  font-size: 28px;
   margin-bottom: 10px;
+  color: #333;
 `;
 
 const Price = styled.p`
-  font-size: 20px;
+  font-size: 22px;
   color: #ff8000;
   margin-bottom: 20px;
 `;
@@ -111,15 +130,30 @@ const Details = styled.div`
 
 const DetailItem = styled.p`
   margin: 5px 0;
+  font-size: 18px;
 `;
 
 const Button = styled.button`
   background-color: #ff8000;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 15px 30px;
   cursor: pointer;
   border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #e67300;
+  }
+`;
+
+const LoadingWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 24px;
 `;
 
 export default CarDetailPage;
