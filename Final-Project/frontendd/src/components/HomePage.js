@@ -82,17 +82,20 @@ const HomePage = () => {
 
 const Header = styled.header`
   text-align: center;
-  margin: 50px 0;
+  margin: 50px 0 80px 0; /* Increase bottom margin to push down the button */
   padding: 20px;
+  font-size: 20px;
 `;
 
-const Button = styled.button`
+const Button = styled.a`
   background-color: #ff8000;
   color: white;
   border: none;
   padding: 10px 20px;
-  margin: 10px;
+  margin: 30px 0 0 0; /* Adjust margin-top for proper spacing */
   cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
 `;
 
 const CarSection = styled.section`
@@ -114,6 +117,7 @@ const CarImage = styled.img`
   width: 100%;
   height: 200px; 
   object-fit: cover;
+  margin-top: 200px;
 `;
 
 const CardContent = styled.div`
@@ -128,8 +132,12 @@ const ButtonGroup = styled.div`
 
 const Testimonials = styled.section`
   text-align: center;
+<<<<<<< HEAD
+  margin: 250px 0; /* Increase margin below testimonials section */
+=======
   margin: 50px 0;
   padding-top: 50px;
+>>>>>>> 541883bd1340278ee64fd0bad4ed018ff2ae173b
 `;
 
 const Testimonial = styled.div`

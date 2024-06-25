@@ -86,9 +86,8 @@ const PaymentsPage = () => {
     <div>
       <AdminContainer>
         <Sidebar>
-          {/*<NavItem>*/}
-          {/*  <Link to="/admin/users">Pengguna</Link>*/}
-          {/*</NavItem>*/}
+          <AdminTitle>Admin</AdminTitle>
+          <AdminUnderline />
           <NavItem>
             <Link to="/admin/cars">Mobil</Link>
           </NavItem>
@@ -148,8 +147,23 @@ const Sidebar = styled.div`
   padding: 20px;
 `;
 
-const NavItem = styled.div`
+const AdminTitle = styled.div`
+  text-align: center;
   margin-bottom: 10px;
+  font-size: 34px;
+  font-weight: bold;
+`;
+
+const AdminUnderline = styled.div`
+  width: 210px;
+  height: 2px;
+  background-color: #000;
+  margin: 0 auto 20px auto;
+`;
+
+const NavItem = styled.div`
+  margin-bottom: 30px;
+  font-size: 20px;
 
   a {
     text-decoration: none;

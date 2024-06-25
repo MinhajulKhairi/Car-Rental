@@ -32,13 +32,15 @@ const Navbar = () => {
 
   return (
     <Nav>
-      <Logo src={LogoImage} alt="Logo" />
-      <NavCenter>
-        <NavItem to="/">Home</NavItem>
+      <NavSectionLeft>
+        <Logo src={LogoImage} alt="Logo" />
+      </NavSectionLeft>
+      <NavSectionCenter>
+        <NavItem to="/">Rental Mobil</NavItem>
         <NavItem to="/payment">Pembayaran</NavItem>
         <NavItem to="/list-mobil">Daftar Mobil</NavItem>
-      </NavCenter>
-      <NavRight>
+      </NavSectionCenter>
+      <NavSectionRight>
         {auth.token ? (
           <LogoutButton to="/logout">Keluar</LogoutButton>
         ) : (
@@ -47,7 +49,7 @@ const Navbar = () => {
             <LoginButton to="/login">Masuk</LoginButton>
           </>
         )}
-      </NavRight>
+      </NavSectionRight>
     </Nav>
   );
 };
@@ -60,25 +62,31 @@ const Nav = styled.nav`
   background-color: #cac7c7;
 `;
 
-const Logo = styled.img`
-  height: 60px;
+const NavSectionLeft = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
-const NavCenter = styled.div`
+const NavSectionCenter = styled.div`
   display: flex;
-  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  position: absolute; /* Added this */
+  left: 50%; /* Added this */
+  transform: translateX(-50%); /* Added this */
+`;
+
+const NavSectionRight = styled.div`
+  display: flex;
+  align-items: center;
   flex: 1;
+  justify-content: flex-end;
 `;
 
 const NavItem = styled(Link)`
   text-decoration: none;
   color: black;
-  margin: 0 15px;
-`;
-
-const NavRight = styled.div`
-  display: flex;
-  align-items: center;
+  margin: 0 10px;
 `;
 
 const LoginButton = styled(Link)`
@@ -108,10 +116,9 @@ const LogoutButton = styled(Link)`
   margin-left: 20px;
 `;
 
-// const SearchInput = styled.input`
-//   padding: 8px;
-//   border: 1px solid #ccc;
-//   border-radius: 5px;
-// `;
+const Logo = styled.img`
+  height: 50px;
+  margin-right: 20px;
+`;
 
 export default Navbar;
