@@ -17,7 +17,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await axios.get(`${serverApi}/carshome`); 
+        const response = await axios.get(`${serverApi}/carshome`);
         setCars(response.data);
       } catch (error) {
         console.error('Error fetching cars:', error);
@@ -35,6 +35,7 @@ const HomePage = () => {
   const handleRentClick = (carId) => {
     navigate(`/rent/${carId}`);
   };
+
   return (
     <div>
       <Header>
@@ -45,12 +46,16 @@ const HomePage = () => {
       </Header>
       <CarSection>
         {cars.map((car) => (
-          <Car>
+          <Car key={car.mobil_id}>
             <CarImage src={`${serverApi}/${car.gambar}`} />
-            <h2>{car.nama_mobil}</h2>
-            <p>{car.fasilitas}</p>
-            <Button onClick={() => handleRentClick(car.mobil_id)}>Sewa</Button>
-            <Button onClick={() => handleDetailClick(car.mobil_id)}>Detail</Button>
+            <CardContent>
+              <h2>{car.nama_mobil}</h2>
+              <p>{car.fasilitas}</p>
+            </CardContent>
+            <ButtonGroup>
+              <Button onClick={() => handleRentClick(car.mobil_id)}>Sewa</Button>
+              <Button onClick={() => handleDetailClick(car.mobil_id)}>Detail</Button>
+            </ButtonGroup>
           </Car>
         ))}
       </CarSection>
@@ -90,6 +95,7 @@ const Button = styled.button`
 
 const CarSection = styled.section`
   display: flex;
+  padding-top: 50px;
   justify-content: center;
   margin: 50px 0;
 `;
@@ -97,6 +103,9 @@ const CarSection = styled.section`
 const Car = styled.div`
   text-align: center;
   margin: 0 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
 `;
 
 const CarImage = styled.img`
@@ -105,9 +114,20 @@ const CarImage = styled.img`
   object-fit: cover;
 `;
 
+const CardContent = styled.div`
+  padding: 20px;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+`;
+
 const Testimonials = styled.section`
   text-align: center;
   margin: 50px 0;
+  padding-top: 50px;
 `;
 
 const Testimonial = styled.div`

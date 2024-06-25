@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import LogoImage from '../assets/images/Logo_UH.png';
+import LogoImage from '../assets/images/bg.png';
 import { useAuth } from './app/AuthProvider';
 
 const Navbar = () => {
@@ -32,17 +32,13 @@ const Navbar = () => {
 
   return (
     <Nav>
-      <NavSection>
-        <Logo src={LogoImage} alt="Logo" />
-        <NavItem to="/">Rental Mobil</NavItem>
-        {/*<SearchInput type="text" placeholder="Cari..." value={searchQuery} onChange={handleSearchInputChange} />*/}
-      </NavSection>
-      <NavSection>
+      <Logo src={LogoImage} alt="Logo" />
+      <NavCenter>
+        <NavItem to="/">Home</NavItem>
         <NavItem to="/payment">Pembayaran</NavItem>
         <NavItem to="/list-mobil">Daftar Mobil</NavItem>
-        <NavItem to="/rating">Feedback</NavItem> {/* Perbarui tautan ke RatingPage */}
-      </NavSection>
-      <NavSection>
+      </NavCenter>
+      <NavRight>
         {auth.token ? (
           <LogoutButton to="/logout">Keluar</LogoutButton>
         ) : (
@@ -51,7 +47,7 @@ const Navbar = () => {
             <LoginButton to="/login">Masuk</LoginButton>
           </>
         )}
-      </NavSection>
+      </NavRight>
     </Nav>
   );
 };
@@ -64,15 +60,25 @@ const Nav = styled.nav`
   background-color: #cac7c7;
 `;
 
-const NavSection = styled.div`
+const Logo = styled.img`
+  height: 60px;
+`;
+
+const NavCenter = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: center;
+  flex: 1;
 `;
 
 const NavItem = styled(Link)`
   text-decoration: none;
   color: black;
-  margin-right: 50px;
+  margin: 0 15px;
+`;
+
+const NavRight = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const LoginButton = styled(Link)`
@@ -100,11 +106,6 @@ const LogoutButton = styled(Link)`
   text-decoration: none;
   border-radius: 5px;
   margin-left: 20px;
-`;
-
-const Logo = styled.img`
-  height: 40px;
-  margin-right: 50px;
 `;
 
 // const SearchInput = styled.input`
