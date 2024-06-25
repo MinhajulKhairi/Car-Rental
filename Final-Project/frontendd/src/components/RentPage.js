@@ -72,7 +72,7 @@ const RentPage = () => {
       const result = await response.json();
       if (result.success) {
         alert('Pemesanan berhasil dibuat');
-        navigate('/'); // Ganti dengan navigasi ke halaman yang sesuai
+        navigate('/payment'); // Ganti dengan navigasi ke halaman yang sesuai
       } else {
         alert(result.message);
       }
@@ -160,8 +160,8 @@ const FormContainer = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 600px;
-  padding: 20px;
+  width: 800px; /* Increased width */
+  padding: 40px; /* Increased padding */
   border: 1px solid #ccc;
   border-radius: 10px;
 `;
