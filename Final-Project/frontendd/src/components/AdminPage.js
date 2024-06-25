@@ -20,9 +20,9 @@ const AdminPage = () => {
     <div>
       <AdminContainer>
         <Sidebar>
-          <NavItem>
-            <Link to="/admin/users">Users</Link>
-          </NavItem>
+          {/*<NavItem>*/}
+          {/*  <Link to="/admin/users">Users</Link>*/}
+          {/*</NavItem>*/}
           <NavItem>
             <Link to="/admin/cars">Mobil</Link>
           </NavItem>
