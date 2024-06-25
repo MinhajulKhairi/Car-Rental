@@ -2,20 +2,22 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './app/AuthProvider';
 
+// component definition
 const LogoutPage = ({ setAuthToken }) => {
   const navigate = useNavigate();
   const auth = useAuth();
 
+  // handle logout
   const handleLogout = () => {
     auth.logOut();
-    navigate('/login');  // Redirect to login page after logging out
+    navigate('/login');
   };
 
   useEffect(() => {
     handleLogout();
-  }, []);  // Empty dependency array ensures this runs once when the component mounts
+  }, []);
 
-  return null;  // No need to render anything
+  return null;
 };
 
 export default LogoutPage;

@@ -6,12 +6,14 @@ import Footer from './Footer';
 import { useAuth } from './app/AuthProvider';
 import { serverApi } from './app/config';
 
+// component definition
 const RentPage = () => {
   const navigate = useNavigate();
   const auth = useAuth();
   const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // useEffect hook
   useEffect(() => {
     if (!auth.user) {
       navigate("/login");
@@ -21,12 +23,12 @@ const RentPage = () => {
       navigate("/admin");
       return;
     }else{
-      // user_id = auth.user.pengguna_id;
       setLoading(false);
       setUserId(auth.user.pengguna_id);
     }
   }, [auth.user, navigate]);
 
+  // state dan event handlers
   console.log(auth.user);
   const { id } = useParams();
   const [formData, setFormData] = useState({
@@ -45,6 +47,7 @@ const RentPage = () => {
     });
   };
 
+  // handle submit function
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
@@ -82,6 +85,7 @@ const RentPage = () => {
     }
   };
 
+  // conditional rendering
   if (loading) {
     return <div>Loading...</div>;
   }

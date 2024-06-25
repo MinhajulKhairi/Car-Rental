@@ -3,10 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from './app/AuthProvider';
 
+// component definition
 const LogoutPage = ({ setAuthToken }) => {
   const navigate = useNavigate();
   const auth = useAuth();
 
+  // tangani proses logout
   const handleLogout = () => {
     auth.logOut();
   };

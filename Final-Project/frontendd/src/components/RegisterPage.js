@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from './app/AuthProvider';
 import { serverApi } from './app/config';
 
+// component definition
 const RegisterPage = () => {
   const [namaLengkap, setNamaLengkap] = useState('');
   const [email, setEmail] = useState('');
@@ -21,6 +22,7 @@ const RegisterPage = () => {
     navigate('/list-mobil');
   }
 
+  // tangani tombol klik saat menekan register
   const handleRegister = async () => {
     try {
       const response = await fetch(`${serverApi}/users/register`, {

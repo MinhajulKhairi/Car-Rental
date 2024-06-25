@@ -8,7 +8,7 @@ from flask_cors import CORS
 from flask import send_file
 from datetime import datetime
 
-
+# Konfigurasi aplikasi
 app = Flask(__name__)
 CORS(app)
 app.secret_key = "secret key"
@@ -16,21 +16,23 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root@localhost/car_rental"
 app.config['JWT_SECRET_KEY'] = "your_secret_key"
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 
+# Inisialisasi Komponen
 db.init_app(app)
 
 jwt = JWTManager(app)
 
 
+# Fungsi-fungsi dekorator
 @jwt.unauthorized_loader
 def unauthorized_response(callback):
     return jsonify({"message": "Akses gagal. Harap berikan token yang valid"}), 401
-
 
 @jwt.expired_token_loader
 def expired_token_response(jwt_header, jwt_payload):
     return jsonify({"message": "Token expired. Silahkan login ulang"}), 401
 
 
+# Endpoint register user
 @app.route("/users/register", methods=["POST"])
 def register_user():
     data = request.get_json()
@@ -60,6 +62,8 @@ def register_user():
     return jsonify({"message": "Pengguna berhasil didaftarkan", "success": True}), 201
 
 
+
+# Endpoint untuk autentikasi pengguna saat login, memproses permintaan login pengguna
 @app.route("/users/login", methods=["POST"])
 def login_user():
     status = 400
@@ -86,6 +90,7 @@ def login_user():
         return jsonify({"message": "Email atau password salah", "success": False}), 401
 
 
+# Endpoint untuk mengambil data profil pengguna yang sedang login
 @app.route("/users/profile", methods=["GET"])
 @jwt_required()
 def user_profile():
@@ -103,6 +108,7 @@ def user_profile():
     return jsonify({"user": user_data}), 200
 
 
+# Endpoint untuk memperbarui/update informasi profil
 @app.route("/users/profile_update", methods=["PUT"])
 @jwt_required()
 def update_profile():
@@ -130,6 +136,7 @@ def update_profile():
     return jsonify({"user": user_data, "message": "Profil berhasil diperbarui"}), 200
 
 
+# Endpoint untuk untuk mendaftarkan admin baru dalam sistem
 @app.route("/admin/register", methods=["POST"])
 def register_admin():
     data = request.get_json()
@@ -151,6 +158,7 @@ def register_admin():
     return jsonify({"message": "Admin berhasil didaftarkan"}), 201
 
 
+# Endpoint untuk melakukan proses login admin ke dalam sistem
 @app.route("/admin/login", methods=["POST"])
 def login_admin():
     data = request.get_json()
@@ -170,10 +178,12 @@ def login_admin():
     return jsonify({"message": "Email atau password salah"}), 401
 
 
+#  untuk memeriksa apakah suatu file memiliki ekstensi yang diperbolehkan
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'gif'}
 
 
+# Endpoint untuk menambahkan data mobil ke dalam database
 @app.route('/cars', methods=['POST'])
 @jwt_required()
 def add_car():
@@ -203,6 +213,7 @@ def add_car():
     return jsonify({"message": "Mobil berhasil ditambahkan", "success": True}), 201
 
 
+# Endpoint untuk mengambil daftar semua mobil dari database
 @app.route('/cars', methods=['GET'])
 def get_all_cars():
     cars = Mobil.query.all()
@@ -232,6 +243,8 @@ def get_all_cars():
 
     return jsonify(cars_list), 200
 
+
+# Endpoint untuk mengambil sejumlah mobil (maksimal 4 mobil) dari database untuk ditampilkan di HomePage
 @app.route('/carshome', methods=['GET'])
 def get_some_cars():
     # max 4 mobil
@@ -263,6 +276,7 @@ def get_some_cars():
     return jsonify(cars_list), 200
 
 
+# Endpoint untuk mengambil informasi sebuah mobil berdasarkan ID mobil
 @app.route('/cars/<int:car_id>', methods=['GET'])
 def get_car_by_id(car_id):
     car = Mobil.query.get(car_id)
@@ -283,6 +297,7 @@ def get_car_by_id(car_id):
     return jsonify(car_data), 200
 
 
+# Endpoint  untuk memperbarui informasi mobil berdasarkan ID mobil di admin
 @app.route('/cars/<int:car_id>', methods=['PUT'])
 @jwt_required()
 def update_car(car_id):
@@ -309,6 +324,7 @@ def update_car(car_id):
     return jsonify({"message": "Mobil berhasil diperbarui", "success": True}), 200
 
 
+# Endpoint untuk menghapus data mobil dari database berdasarkan ID mobil
 @app.route('/cars/<int:car_id>', methods=['DELETE'])
 @jwt_required()
 def delete_car(car_id):
@@ -329,10 +345,13 @@ def delete_car(car_id):
     return jsonify({"message": "Mobil berhasil dihapus", "success": True}), 200
 
 
+# memeriksa apakah ekstensi file yang diberikan termasuk dalam kumpulan ekstensi file yang diperbolehkan
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+# Endpoint untuk membuat pesanan baru
 @app.route("/pemesanan", methods=["POST"])
 @jwt_required()
 def create_pemesanan():
@@ -384,7 +403,7 @@ def create_pemesanan():
     return jsonify({"message": "Pemesanan berhasil dibuat", "success": True}), 201
 
 
-
+# Endpoint untuk mengambil semua data pemesanan dari database
 @app.route("/pemesanan", methods=["GET"])
 @jwt_required()
 def get_all_pemesanan():
@@ -412,6 +431,8 @@ def get_all_pemesanan():
         result.append(pemesanan_data)
     return jsonify(result), 200
 
+
+# Endpoint untuk mengambil semua data pemesanan yang berkaitan dengan pengguna tertentu berdasarkan ID pengguna
 @app.route("/pemesanan/pengguna/<int:pengguna_id>", methods=["GET"])
 @jwt_required()
 def get_pemesanan_by_pengguna_id(pengguna_id):
@@ -440,6 +461,7 @@ def get_pemesanan_by_pengguna_id(pengguna_id):
     return jsonify({"pemesanan": pemesanan_list, "success": True}), 200
 
 
+# Endpoint untuk mengambil data pemesanan berdasarkan ID pemesanan
 @app.route("/pemesanan/<int:pemesanan_id>", methods=["GET"])
 @jwt_required()
 def get_pemesanan_by_id(pemesanan_id):
@@ -459,6 +481,7 @@ def get_pemesanan_by_id(pemesanan_id):
     return jsonify(pemesanan_data), 200
 
 
+# Endpoint untuk memperbarui data pemesanan
 @app.route("/pemesanan/<int:pemesanan_id>", methods=["PUT"])
 @jwt_required()
 def update_pemesanan(pemesanan_id):
@@ -478,6 +501,7 @@ def update_pemesanan(pemesanan_id):
     return jsonify({"message": "Pemesanan berhasil diperbarui"}), 200
 
 
+# Endpoint untuk menghapus data pemesanan
 @app.route("/pemesanan/<int:pemesanan_id>", methods=["DELETE"])
 @jwt_required()
 def delete_pemesanan(pemesanan_id):
@@ -497,6 +521,8 @@ def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+# Endpoint untuk membuat data pembayaran baru
 @app.route("/pembayaran", methods=["POST"])
 @jwt_required()
 def create_pembayaran():
@@ -537,6 +563,7 @@ def create_pembayaran():
     return jsonify({"message": "Pembayaran berhasil dibuat"}), 201
 
 
+# Endpoint  untuk mengambil semua data pembayaran dari database.
 @app.route("/pembayaran", methods=["GET"])
 @jwt_required()
 def get_all_pembayaran():
@@ -563,6 +590,7 @@ def get_all_pembayaran():
     return jsonify(result), 200
 
 
+# Endpoint untuk mengambil informasi pembayaran berdasarkan ID pembayaran
 @app.route("/pembayaran/<int:pembayaran_id>", methods=["GET"])
 @jwt_required()
 def get_pembayaran_by_id(pembayaran_id):
@@ -581,6 +609,7 @@ def get_pembayaran_by_id(pembayaran_id):
     return jsonify(pembayaran_data), 200
 
 
+# Endpoint untuk memperbarui informasi pembayaran berdasarkan ID pembayaran
 @app.route("/pembayaran/<int:pembayaran_id>", methods=["PUT"])
 @jwt_required()
 def update_pembayaran(pembayaran_id):
@@ -599,6 +628,7 @@ def update_pembayaran(pembayaran_id):
     return jsonify({"message": "Pembayaran berhasil diperbarui"}), 200
 
 
+# Endpoint  untuk menghapus data pembayaran berdasarkan ID pembayaran
 @app.route("/pembayaran/<int:pembayaran_id>", methods=["DELETE"])
 @jwt_required()
 def delete_pembayaran(pembayaran_id):

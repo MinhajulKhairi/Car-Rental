@@ -7,35 +7,36 @@ import axios from 'axios'; // Import axios for API requests
 import { useAuth } from './app/AuthProvider'; // Import useAuth for authentication
 import { serverApi } from './app/config';
 
+// component definition
 const CarDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const auth = useAuth();
   const [car, setCar] = useState(null);
 
+  // useEffect hook
   useEffect(() => {
     if (!auth.user) {
       navigate("/login");
       return;
     }
-
     const fetchCarById = async () => {
       try {
         const response = await axios.get(`${serverApi}/cars/${id}`);
         setCar(response.data);
       } catch (error) {
         console.error('Error fetching car:', error);
-        // Handle error state if needed
       }
     };
-
     fetchCarById();
   }, [auth.user, id, navigate]);
 
+  // event handlers
   const handleRentClick = () => {
     navigate(`/rent/${id}`);
   };
 
+  // render method
   if (!car) {
     return <LoadingWrapper>Loading...</LoadingWrapper>;
   }

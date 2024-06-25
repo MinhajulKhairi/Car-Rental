@@ -6,10 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from './app/AuthProvider';
 import { serverApi } from './app/config';
 
+// component definition
 const PaymentPage = () => {
   const navigate = useNavigate();
   const auth = useAuth();
   let user_id = null;
+
+  // useEffect Hook
   useEffect(() => {
     if (!auth.user) {
       navigate("/login");
@@ -23,6 +26,7 @@ const PaymentPage = () => {
     }
   }, [auth.user, navigate]);
 
+  // state and event handlers
   const [loading, setLoading] = useState(true);
   
   const [pemesanans, setPemesanans] = useState([]);
@@ -31,6 +35,7 @@ const PaymentPage = () => {
     paymentProof: null,
     totalPayment: '',
   });
+
   // set pemesananan (memuat data pemesanan)
   useEffect(() => {
     if (user_id) {
@@ -59,6 +64,7 @@ const PaymentPage = () => {
     }
   }, [user_id]);
 
+  // handle change function
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData({
@@ -67,6 +73,7 @@ const PaymentPage = () => {
     });
   };
 
+  // handle submit function
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!selectedPemesananId) {
@@ -80,6 +87,8 @@ const PaymentPage = () => {
     formDataToSend.append('metode_pembayaran', 'Transfer Bank');
     formDataToSend.append('status_pembayaran', 'Menunggu Konfirmasi');
     formDataToSend.append('paymentProof', formData.paymentProof);
+
+    // API Request
     try {
       const response = await fetch(`${serverApi}/pembayaran`, {
         method: 'POST',
@@ -88,6 +97,8 @@ const PaymentPage = () => {
         },
         body: formDataToSend
       });
+
+      // handle response
       const result = await response.json();
       if (result.success) {
         alert('Pembayaran berhasil dibuat');
@@ -95,6 +106,7 @@ const PaymentPage = () => {
       } else {
         alert(result.message);
       }
+      // error handling
     } catch (error) {
       console.error('Error creating reservation:', error);
       alert('Terjadi kesalahan saat membuat pembayaran');
@@ -107,6 +119,7 @@ const PaymentPage = () => {
       <FormContainer>
         <Form onSubmit={handleSubmit}>
           <Label>Pilih Pesanan yang Akan Dibayar</Label>
+
           <Select name="pemesanan_id" onChange={(e) => setSelectedPemesananId(e.target.value)} required>
             <option value="">Pilih Pesanan</option>
             {pemesanans.length === 0 ? (
@@ -119,8 +132,8 @@ const PaymentPage = () => {
               ))
             )}
           </Select>
-
           <Label>Bukti Pembayaran</Label>
+
           <Input
             type="file"
             name="paymentProof"

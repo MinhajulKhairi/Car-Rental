@@ -7,6 +7,7 @@ import useToken from './app/useToken';
 import { useAuth } from './app/AuthProvider'
 import { serverApi } from './app/config';
 
+// component definition
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,6 +24,8 @@ const LoginPage = () => {
     email: email,
     password: password
   });
+
+  // event handler untuk login
   const handleLogin = async () => {
     try {
       const response = await fetch(`${serverApi}/users/login`, {
@@ -45,9 +48,6 @@ const LoginPage = () => {
       if (data.success) {
         // simpan ke useState token
         auth.loginAction(data.user);
-        // alert(data.user.access_token)
-        // setToken(data.user.access_token);
-        // navigate('/list-mobil');
       } else {
         setError(data.message);
       }

@@ -9,11 +9,13 @@ import axios from 'axios'; // Import axios for API requests
 import { useNavigate } from 'react-router-dom';
 import { serverApi } from './app/config';
 
+// Component definition
 const HomePage = () => {
   const navigate = useNavigate();
   const auth = useAuth();
   const [cars, setCars] = useState([]);
 
+  // melakukan fetch data
   useEffect(() => {
     const fetchCars = async () => {
       try {
@@ -21,13 +23,13 @@ const HomePage = () => {
         setCars(response.data);
       } catch (error) {
         console.error('Error fetching cars:', error);
-        // Handle error state if needed
       }
     };
 
     fetchCars();
   }, []);
 
+  // event handlers/tangani klik saat menekan tombol detail mobil dan sewa mobil
   const handleDetailClick = (carId) => {
     navigate(`/car-detail/${carId}`);
   };
@@ -110,7 +112,7 @@ const Car = styled.div`
 
 const CarImage = styled.img`
   width: 100%;
-  height: 200px; /* Set fixed height for the image */
+  height: 200px; 
   object-fit: cover;
 `;
 

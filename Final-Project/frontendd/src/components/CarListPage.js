@@ -7,37 +7,39 @@ import axios from 'axios'; // Import axios for API requests
 import { useAuth } from './app/AuthProvider'; // Import useAuth for authentication
 import { serverApi } from './app/config';
 
+// definition component
 const CarListPage = () => {
   const navigate = useNavigate();
   const auth = useAuth();
   const [cars, setCars] = useState([]);
 
+  // use effect hook
   useEffect(() => {
     if (!auth.user) {
       navigate("/login");
       return;
     }
-
     const fetchCars = async () => {
       try {
         const response = await axios.get(`${serverApi}/cars`);
         setCars(response.data);
       } catch (error) {
         console.error('Error fetching cars:', error);
-        // Handle error state if needed
       }
     };
 
     fetchCars();
   }, [auth.user, navigate]);
 
+
+  // event handler
   const handleDetailClick = (carId) => {
     navigate(`/car-detail/${carId}`);
   };
-
   const handleRentClick = (carId) => {
     navigate(`/rent/${carId}`);
   };
+
 
   return (
     <PageWrapper>
