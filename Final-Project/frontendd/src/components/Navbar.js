@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import LogoImage from '../assets/images/bg.png';
 import { useAuth } from './app/AuthProvider';
 
 const Navbar = () => {
@@ -31,6 +32,9 @@ const Navbar = () => {
 
   return (
     <Nav>
+      <NavSectionLeft>
+        <Logo src={LogoImage} alt="Logo" />
+      </NavSectionLeft>
       <NavSectionCenter>
         <NavItem to="/">Rental Mobil</NavItem>
         <NavItem to="/payment">Pembayaran</NavItem>
@@ -56,6 +60,11 @@ const Nav = styled.nav`
   align-items: center;
   padding: 20px;
   background-color: #cac7c7;
+`;
+
+const NavSectionLeft = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const NavSectionCenter = styled.div`
@@ -105,6 +114,11 @@ const LogoutButton = styled(Link)`
   text-decoration: none;
   border-radius: 5px;
   margin-left: 20px;
+`;
+
+const Logo = styled.img`
+  height: 50px;
+  margin-right: 20px;
 `;
 
 export default Navbar;
