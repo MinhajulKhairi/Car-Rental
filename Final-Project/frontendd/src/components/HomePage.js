@@ -45,7 +45,7 @@ const HomePage = () => {
       </Header>
       <CarSection>
         {cars.map((car) => (
-          <Car>
+          <Car key={car.mobil_id}>
             <CarImage src={`${serverApi}/${car.gambar}`} />
             <h2>{car.nama_mobil}</h2>
             <p>{car.fasilitas}</p>
@@ -75,17 +75,20 @@ const HomePage = () => {
 
 const Header = styled.header`
   text-align: center;
-  margin: 50px 0;
+  margin: 50px 0 80px 0; /* Increase bottom margin to push down the button */
   padding: 20px;
+  font-size: 20px;
 `;
 
-const Button = styled.button`
+const Button = styled.a`
   background-color: #ff8000;
   color: white;
   border: none;
   padding: 10px 20px;
-  margin: 10px;
+  margin: 30px 0 0 0; /* Adjust margin-top for proper spacing */
   cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
 `;
 
 const CarSection = styled.section`
@@ -103,11 +106,12 @@ const CarImage = styled.img`
   width: 100%;
   height: 200px; /* Set fixed height for the image */
   object-fit: cover;
+  margin-top: 200px;
 `;
 
 const Testimonials = styled.section`
   text-align: center;
-  margin: 50px 0;
+  margin: 250px 0; /* Increase margin below testimonials section */
 `;
 
 const Testimonial = styled.div`

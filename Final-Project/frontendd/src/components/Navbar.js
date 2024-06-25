@@ -32,17 +32,15 @@ const Navbar = () => {
 
   return (
     <Nav>
-      <NavSection>
+      <NavSectionLeft>
         <Logo src={LogoImage} alt="Logo" />
+      </NavSectionLeft>
+      <NavSectionCenter>
         <NavItem to="/">Rental Mobil</NavItem>
-        {/*<SearchInput type="text" placeholder="Cari..." value={searchQuery} onChange={handleSearchInputChange} />*/}
-      </NavSection>
-      <NavSection>
         <NavItem to="/payment">Pembayaran</NavItem>
         <NavItem to="/list-mobil">Daftar Mobil</NavItem>
-        <NavItem to="/rating">Feedback</NavItem> {/* Perbarui tautan ke RatingPage */}
-      </NavSection>
-      <NavSection>
+      </NavSectionCenter>
+      <NavSectionRight>
         {auth.token ? (
           <LogoutButton to="/logout">Keluar</LogoutButton>
         ) : (
@@ -51,7 +49,7 @@ const Navbar = () => {
             <LoginButton to="/login">Masuk</LoginButton>
           </>
         )}
-      </NavSection>
+      </NavSectionRight>
     </Nav>
   );
 };
@@ -64,7 +62,18 @@ const Nav = styled.nav`
   background-color: #cac7c7;
 `;
 
-const NavSection = styled.div`
+const NavSectionLeft = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const NavSectionCenter = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+`;
+
+const NavSectionRight = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -72,7 +81,7 @@ const NavSection = styled.div`
 const NavItem = styled(Link)`
   text-decoration: none;
   color: black;
-  margin-right: 50px;
+  margin: 0 10px;
 `;
 
 const LoginButton = styled(Link)`
@@ -104,13 +113,7 @@ const LogoutButton = styled(Link)`
 
 const Logo = styled.img`
   height: 40px;
-  margin-right: 50px;
+  margin-right: 20px;
 `;
-
-// const SearchInput = styled.input`
-//   padding: 8px;
-//   border: 1px solid #ccc;
-//   border-radius: 5px;
-// `;
 
 export default Navbar;

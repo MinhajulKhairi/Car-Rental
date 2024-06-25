@@ -12,7 +12,6 @@ const CarsPage = () => {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
     if (!auth.user) {
       navigate("/login");
@@ -45,25 +44,22 @@ const CarsPage = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  const handleDeleteBooking = async (carsId) => {
+
+  const handleDeleteBooking = async (carId) => {
     if (window.confirm("Apakah Anda yakin ingin menghapus mobil ini?")) {
       try {
-        const response = await fetch(`${serverApi}/cars/${carsId}`, {
+        const response = await fetch(`${serverApi}/cars/${carId}`, {
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${auth.token}`
           }
         });
         if (!response.ok) {
-          // throw new Error('Gagal menghapus mobil');
           alert('Token expired. Silahkan login ulang');
           window.location.href = '/logout-direct';
           return;
         }
-        // const updatedCars = cars.filter(car => car.pemesanan_id !== carsId);
-        // setCars(updatedCars);
         alert('Mobil berhasil dihapus');
-        // reload
         window.location.reload();
       } catch (error) {
         console.error('Error deleting mobil:', error);
@@ -76,9 +72,8 @@ const CarsPage = () => {
     <div>
       <AdminContainer>
         <Sidebar>
-          {/*<NavItem>*/}
-          {/*  <Link to="/admin/users">Pengguna</Link>*/}
-          {/*</NavItem>*/}
+          <AdminTitle>Admin</AdminTitle>
+          <AdminUnderline />
           <NavItem>
             <Link to="/admin/cars">Mobil</Link>
           </NavItem>
@@ -111,7 +106,6 @@ const CarsPage = () => {
                   <td>{index + 1}</td>
                   <td>{car.nama_mobil}</td>
                   <td><img src={`${serverApi}/${car.gambar}`} alt={car.nama_mobil} style={{ width: '100px' }} /></td>
-                  {/* format uang untuk harga sewa */}
                   <td>{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(car.harga_sewa)}</td>
                   <td>{car.status}</td>
                   <td>
@@ -137,10 +131,12 @@ const Sidebar = styled.div`
   width: 200px;
   background-color: #f4f4f4;
   padding: 20px;
+  text-align: center;
 `;
 
 const NavItem = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 30px;
+  font-size: 20px;
 
   a {
     text-decoration: none;
@@ -155,6 +151,20 @@ const NavItem = styled.div`
 const Content = styled.div`
   flex-grow: 1;
   padding: 20px;
+`;
+
+const AdminTitle = styled.div`
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 34px;
+  font-weight: bold;
+`;
+
+const AdminUnderline = styled.div`
+  width: 210px;
+  height: 2px;
+  background-color: #000;
+  margin: 0 auto 20px auto;
 `;
 
 const Header = styled.div`
