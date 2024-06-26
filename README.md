@@ -2,6 +2,7 @@
 
 
 Panduan Menjalankan Aplikasi Web
+
 Persiapan Awal
 1. Import Database:
 Import file SQL car_rental ke dalam phpMyAdmin terlebih dahulu.
