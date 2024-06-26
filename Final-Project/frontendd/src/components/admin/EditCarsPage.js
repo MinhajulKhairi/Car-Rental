@@ -6,6 +6,7 @@ import Footer from '../Footer';
 import { useAuth } from '../app/AuthProvider';
 import { serverApi } from '../app/config';
 
+// komponen EditCar
 const EditCarPage = () => {
   const auth = useAuth();
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const EditCarPage = () => {
   });
 
   useEffect(() => {
+    // pemeriksaan autentikasi dan autorisasi
     if (!auth.user) {
       navigate("/login");
     } else if (auth.user.role !== 'admin') {
@@ -49,6 +51,7 @@ const EditCarPage = () => {
     }
   }, [auth.user, auth.token, carId, navigate]);
 
+  // event handlers
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCarData({ ...carData, [name]: value });

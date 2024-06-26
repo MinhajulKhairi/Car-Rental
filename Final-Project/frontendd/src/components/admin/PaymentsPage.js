@@ -12,7 +12,8 @@ const PaymentsPage = () => {
   const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
   const auth = useAuth();
-  
+
+  // pemeriksaan autentikasi dan autorisasi
   useEffect(() => {
     if (!auth.user) {
       navigate("/login");
@@ -24,6 +25,7 @@ const PaymentsPage = () => {
     }
   }, [auth.user, navigate]);
 
+  // mengambil data pembayaran
   useEffect(() => {
     const fetchPayments = async () => {
       try {
@@ -55,6 +57,7 @@ const PaymentsPage = () => {
     fetchPayments();
   }, []); // [] menandakan useEffect hanya dijalankan sekali saat komponen dimuat
 
+  // menghapus pembayaran
   const handleDeletePayment = async (pembayaranId) => {
     if (window.confirm("Apakah Anda yakin ingin menghapus pembayaran ini?")) {
       try {
@@ -65,9 +68,7 @@ const PaymentsPage = () => {
           }
         });
         if (!response.ok) {
-          // throw new Error('Gagal menghapus pembayaran');
           alert('Token expired. Silahkan login ulang response');
-          // window.location.href = '/logout-direct';
           return;
         }
         const updatedPayments = payments.filter(payment => payment.pemesanan_id !== pembayaranId);
@@ -138,7 +139,7 @@ const PaymentsPage = () => {
 
 const AdminContainer = styled.div`
   display: flex;
-  min-height: calc(100vh - 160px); // Adjust height based on Navbar and Footer height
+  min-height: calc(100vh - 160px); 
 `;
 
 const Sidebar = styled.div`

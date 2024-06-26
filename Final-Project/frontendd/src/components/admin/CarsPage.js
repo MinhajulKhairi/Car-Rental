@@ -6,12 +6,14 @@ import Footer from '../Footer';
 import { useAuth } from '../app/AuthProvider';
 import { serverApi } from '../app/config';
 
+// auth dan navigasi
 const CarsPage = () => {
   const auth = useAuth();
   const navigate = useNavigate();
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // pemeriksaan autentikasi dan autorisasi
   useEffect(() => {
     if (!auth.user) {
       navigate("/login");
@@ -41,6 +43,7 @@ const CarsPage = () => {
     fetchCars();
   }, [auth.token]);
 
+  // render loading
   if (loading) {
     return <div>Loading...</div>;
   }

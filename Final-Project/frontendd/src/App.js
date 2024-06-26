@@ -9,7 +9,7 @@ import CarListPage from './components/CarListPage';
 import CarDetailPage from './components/CarDetailPage';
 import PaymentPage from './components/PaymentPage';
 import RentPage from './components/RentPage';
-import RatingPage from './components/RatingPage';
+// import RatingPage from './components/RatingPage';
 import AdminPage from './components/AdminPage';
 // import UsersPage from './components/admin/UsersPage';
 import CarsPage from './components/admin/CarsPage';

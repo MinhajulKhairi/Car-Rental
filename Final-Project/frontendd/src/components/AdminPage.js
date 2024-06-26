@@ -38,7 +38,7 @@ const AdminPage = () => {
         <Content>
           <CenteredText>
             <h1>Welcome to Admin Dashboard</h1>
-            <h1>Tetap Semangat dalam Bekerja!</h1>
+            {/*<h1>Tetap Semangat dalam Bekerja!</h1>*/}
             {/* This will display the default admin page content or instructions */}
           </CenteredText>
         </Content>

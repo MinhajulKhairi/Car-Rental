@@ -12,7 +12,7 @@ const PaymentPage = () => {
   const auth = useAuth();
   let user_id = null;
 
-  // useEffect Hook
+  // pemeriksaan autentikasi dan autorisasi
   useEffect(() => {
     if (!auth.user) {
       navigate("/login");

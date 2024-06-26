@@ -12,6 +12,7 @@ const BookingsPage = () => {
   const navigate = useNavigate();
   const auth = useAuth();
 
+  // pemeriksaan autentikasi dan autorisasi
   useEffect(() => {
     if (!auth.user) {
       navigate("/login");
@@ -21,6 +22,8 @@ const BookingsPage = () => {
     }
   }, [auth.user, navigate]);
 
+
+  // mengambil data pesanan
   useEffect(() => {
     const fetchBookings = async () => {
       try {
@@ -46,6 +49,7 @@ const BookingsPage = () => {
     fetchBookings();
   }, [auth.token, navigate]);
 
+  // menghapus pesanan
   const handleDeleteBooking = async (pemesananId) => {
     if (window.confirm("Apakah Anda yakin ingin menghapus pemesanan ini?")) {
       try {
@@ -61,8 +65,6 @@ const BookingsPage = () => {
           window.location.href = '/logout-direct';
           return;
         }
-        // const updatedBookings = bookings.filter(booking => booking.pemesanan_id !== pemesananId);
-        // setBookings(updatedBookings);
         alert('Pemesanan berhasil dihapus');
         // reload
         window.location.reload();
@@ -129,7 +131,7 @@ const BookingsPage = () => {
 
 const AdminContainer = styled.div`
   display: flex;
-  min-height: calc(100vh - 160px); // Adjust height based on Navbar and Footer height
+  min-height: calc(100vh - 160px); 
 `;
 
 const Sidebar = styled.div`
