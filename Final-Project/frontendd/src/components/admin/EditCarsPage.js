@@ -170,7 +170,11 @@ const Content = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 70px;
 `;
 
 const FormGroup = styled.div`

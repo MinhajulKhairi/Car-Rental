@@ -5,21 +5,16 @@ import LogoImage from '../assets/images/bg.png';
 import { useAuth } from './app/AuthProvider';
 
 const Navbar = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const handleSearchInputChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
-
+  const [isAdmin, setIsAdmin] = useState(false);
   const auth = useAuth();
 
-  // useEffect untuk memantau perubahan isAuthenticated
   useEffect(() => {
-    // Lakukan sesuatu setiap kali isAuthenticated berubah
     refreshNavbar();
-  }, [auth.token]);
+    console.log('User role:', auth.user?.role);
+    setIsAdmin(auth.user?.role === 'admin');
+  }, [auth.token, auth.user]);
 
   const refreshNavbar = () => {
-    // Menghapus navbar yang lebih dari satu kali jika ada
     const navBars = document.querySelectorAll('nav');
     if (navBars.length > 1) {
       navBars.forEach((nav, index) => {
@@ -37,7 +32,11 @@ const Navbar = () => {
       </NavSectionLeft>
       <NavSectionCenter>
         <NavItem to="/">Rental Mobil</NavItem>
-        <NavItem to="/payment">Pembayaran</NavItem>
+        {isAdmin ? (
+          <NavItem to="/dashboard">Menu</NavItem>
+        ) : (
+          <NavItem to="/payment">Pembayaran</NavItem>
+        )}
         <NavItem to="/list-mobil">Daftar Mobil</NavItem>
       </NavSectionCenter>
       <NavSectionRight>
@@ -71,9 +70,9 @@ const NavSectionCenter = styled.div`
   display: flex;
   align-items: center;
   font-size: 20px;
-  position: absolute; /* Added this */
-  left: 50%; /* Added this */
-  transform: translateX(-50%); /* Added this */
+  position: absolute; 
+  left: 50%; 
+  transform: translateX(-50%); 
 `;
 
 const NavSectionRight = styled.div`

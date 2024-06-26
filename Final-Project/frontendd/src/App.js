@@ -11,7 +11,7 @@ import PaymentPage from './components/PaymentPage';
 import RentPage from './components/RentPage';
 import RatingPage from './components/RatingPage';
 import AdminPage from './components/AdminPage';
-import UsersPage from './components/admin/UsersPage';
+// import UsersPage from './components/admin/UsersPage';
 import CarsPage from './components/admin/CarsPage';
 import AddCarsPage from './components/admin/AddCarsPage';
 import EditCarPage from './components/admin/EditCarsPage';
