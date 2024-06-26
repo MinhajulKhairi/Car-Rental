@@ -89,9 +89,8 @@ const EditCarPage = () => {
     <div>
       <AdminContainer>
         <Sidebar>
-          {/*<NavItem>*/}
-          {/*  <Link to="/admin/users">Pengguna</Link>*/}
-          {/*</NavItem>*/}
+          <AdminTitle>Admin</AdminTitle>
+          <AdminUnderline />
           <NavItem>
             <Link to="/admin/cars">Mobil</Link>
           </NavItem>
@@ -168,6 +167,20 @@ const NavItem = styled.div`
 const Content = styled.div`
   flex-grow: 1;
   padding: 20px;
+`;
+
+const AdminTitle = styled.div`
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 34px;
+  font-weight: bold;
+`;
+
+const AdminUnderline = styled.div`
+  width: 210px;
+  height: 2px;
+  background-color: #000;
+  margin: 0 auto 20px auto;
 `;
 
 const Form = styled.form`
