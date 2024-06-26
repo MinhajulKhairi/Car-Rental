@@ -13,7 +13,7 @@ const CarListPage = () => {
   const auth = useAuth();
   const [cars, setCars] = useState([]);
 
-  // use effect hook
+  // pemeriksaan autentikasi dan autorisasi
   useEffect(() => {
     if (!auth.user) {
       navigate("/login");

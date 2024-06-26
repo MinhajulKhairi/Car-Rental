@@ -14,7 +14,7 @@ const CarDetailPage = () => {
   const auth = useAuth();
   const [car, setCar] = useState(null);
 
-  // useEffect hook
+  // pemeriksaan autentikasi dan autorisasi
   useEffect(() => {
     if (!auth.user) {
       navigate("/login");

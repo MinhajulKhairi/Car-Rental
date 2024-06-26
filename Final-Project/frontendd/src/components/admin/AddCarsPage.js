@@ -11,6 +11,7 @@ const AddCarsPage = () => {
   const auth = useAuth();
   const navigate = useNavigate();
 
+  // pemeriksaan autentikasi dan autorisasi
   if (!auth.user) {
     navigate("/login");
   }
@@ -18,6 +19,7 @@ const AddCarsPage = () => {
     navigate("/list-mobil");
   }
 
+  // state management
   const [carData, setCarData] = useState({
     nama_mobil: '',
     warna: '',
@@ -28,11 +30,11 @@ const AddCarsPage = () => {
     gambar: null
   });
 
+  // event handlers
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCarData({ ...carData, [name]: value });
   };
-
   const handleFileChange = (e) => {
     setCarData({ ...carData, gambar: e.target.files[0] });
   };

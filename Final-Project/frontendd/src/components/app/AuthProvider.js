@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
+// komponen auth provider
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
   const [token, setToken] = useState(localStorage.getItem("site") || "");
   const navigate = useNavigate();
 
+  // useeffect hook
   useEffect(() => {
     // Load user data from localStorage when the component mounts
     const storedUser = localStorage.getItem("user");
@@ -24,6 +26,7 @@ const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  // menangani login pengguna
   const loginAction = async (data) => {
     if (data) {
       setUser(data);

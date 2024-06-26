@@ -33,7 +33,6 @@ const HomePage = () => {
   const handleDetailClick = (carId) => {
     navigate(`/car-detail/${carId}`);
   };
-
   const handleRentClick = (carId) => {
     navigate(`/rent/${carId}`);
   };
@@ -132,12 +131,10 @@ const ButtonGroup = styled.div`
 
 const Testimonials = styled.section`
   text-align: center;
-<<<<<<< HEAD
   margin: 250px 0; /* Increase margin below testimonials section */
-=======
   margin: 50px 0;
   padding-top: 50px;
->>>>>>> 541883bd1340278ee64fd0bad4ed018ff2ae173b
+
 `;
 
 const Testimonial = styled.div`
