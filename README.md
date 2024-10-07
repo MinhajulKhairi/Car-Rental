@@ -1,7 +1,15 @@
 # Car-Rental Project Using Python Flask and React.js
 
+# Deskripsi Sistem
+Sistem ini merupakan platform yang menyediakan proses pengumpulan data dan penyajian informasi secara otomatis mengenai daftar harga mobil, ketersediaan mobil, data pemesanan, dan informasi pengguna. Input data dilakukan oleh admin, yang akan diproses untuk menghasilkan data yang akurat. Keluaran dari sistem ini berupa informasi yang terus diperbarui, memudahkan staf dalam pengelolaan dan pelayanan kepada pelanggan. Sistem ini akan membantu meningkatkan efisiensi dalam operasional penyewaan mobil.
 
-Panduan Menjalankan Aplikasi Web
+# Perangkat yang digunakan
+Flask: Digunakan untuk backend
+ReactJs: Digunakan untuk front end
+Untuk backend dan frontend dihubungkan menggunakan api
+Komputer: Diperlukan untuk pengembangan dan penggunaan aplikasi rental mobil.
+
+# Panduan Menjalankan Aplikasi Web
 
 Persiapan Awal
 1. Import Database:
